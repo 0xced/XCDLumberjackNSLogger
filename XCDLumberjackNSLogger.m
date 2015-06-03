@@ -51,7 +51,7 @@
 {
 	int level = log2f(logMessage.flag);
 	NSString *tag = self.tags[@(logMessage.context)];
-	LogMessageToF(self.logger, logMessage.fileName.UTF8String, (int)logMessage.line, logMessage.function.UTF8String, tag, level, @"%@", logMessage.message);
+	LogMessageRawToF(self.logger, logMessage.fileName.UTF8String, (int)logMessage.line, logMessage.function.UTF8String, tag, level, logMessage.message);
 }
 
 @end
