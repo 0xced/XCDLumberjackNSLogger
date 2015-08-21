@@ -60,6 +60,38 @@ static NSData * MessageAsData(NSString *message);
 		LogMessageRawToF(self.logger, logMessage.fileName.UTF8String, (int)logMessage.line, logMessage.function.UTF8String, tag, level, logMessage.message);
 }
 
+#pragma mark - NSObject
+
+- (NSString *) debugDescription
+{
+	NSMutableString *debugDescription = [NSMutableString stringWithString:[super debugDescription]];
+	NSString *bonjourServiceName = (__bridge NSString *)self.logger->bonjourServiceName;
+	NSString *viewerHost = (__bridge NSString *)self.logger->host;
+	uint32_t options = self.logger->options;
+	NSDictionary *tags = self.tags;
+	
+	if (bonjourServiceName)
+		[debugDescription appendFormat:@"\n\tBonjour Service Name: %@", bonjourServiceName];
+	if (viewerHost)
+		[debugDescription appendFormat:@"\n\tViewer Host: %@", viewerHost, @(self.logger->port)];
+	
+	[debugDescription appendString:@"\n\tOptions:"];
+	[debugDescription appendFormat:@"\n\t\tLog To Console:               %@", options & kLoggerOption_LogToConsole              ? @"YES" : @"NO"];
+	[debugDescription appendFormat:@"\n\t\tCapture System Console:       %@", options & kLoggerOption_CaptureSystemConsole      ? @"YES" : @"NO"];
+	[debugDescription appendFormat:@"\n\t\tBuffer Logs Until Connection: %@", options & kLoggerOption_BufferLogsUntilConnection ? @"YES" : @"NO"];
+	[debugDescription appendFormat:@"\n\t\tBrowse Bonjour:               %@", options & kLoggerOption_BrowseBonjour             ? @"YES" : @"NO"];
+	[debugDescription appendFormat:@"\n\t\tBrowse Only Local Domain:     %@", options & kLoggerOption_BrowseOnlyLocalDomain     ? @"YES" : @"NO"];
+	[debugDescription appendFormat:@"\n\t\tUse SSL:                      %@", options & kLoggerOption_UseSSL                    ? @"YES" : @"NO"];
+	
+	if (tags.count > 0)
+	{
+		[debugDescription appendString:@"\n\tTags:"];
+		for (NSNumber *context in [[tags allKeys] sortedArrayUsingSelector:@selector(compare:)])
+			[debugDescription appendFormat:@"\n\t\t%@ -> %@", context, tags[context]];
+	}
+	return [debugDescription copy];
+}
+
 @end
 
 static NSData * MessageAsData(NSString *message)
