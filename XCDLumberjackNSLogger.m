@@ -73,7 +73,7 @@ static NSData * MessageAsData(NSString *message);
 	if (bonjourServiceName)
 		[debugDescription appendFormat:@"\n\tBonjour Service Name: %@", bonjourServiceName];
 	if (viewerHost)
-		[debugDescription appendFormat:@"\n\tViewer Host: %@", viewerHost, @(self.logger->port)];
+		[debugDescription appendFormat:@"\n\tViewer Host: %@:%@", viewerHost, @(self.logger->port)];
 	
 	[debugDescription appendString:@"\n\tOptions:"];
 	[debugDescription appendFormat:@"\n\t\tLog To Console:               %@", options & kLoggerOption_LogToConsole              ? @"YES" : @"NO"];
