@@ -32,6 +32,13 @@
 
 static NSData * MessageAsData(NSString *message);
 
+static void SetThreadNameWithMessage(DDLogMessage *logMessage)
+{
+	// There is no _thread name_ parameter for LogXXXToF functions, but we can abuse NSLogger’s thread name caching mechanism which uses the current thread dictionary
+	NSString *queueLabel = [logMessage.queueLabel isEqualToString:@"com.apple.main-thread"] ? @"Main Queue" : logMessage.queueLabel;
+	NSThread.currentThread.threadDictionary[@"__$NSLoggerThreadName$__"] = [NSString stringWithFormat:@"%@ [%@]", logMessage.threadID, queueLabel];
+}
+
 @synthesize logFormatter = _logFormatter;
 
 - (NSString *) loggerName
@@ -54,6 +61,7 @@ static NSData * MessageAsData(NSString *message);
 	int level = log2f(logMessage.flag);
 	NSString *tag = self.tags[@(logMessage.context)];
 	NSData *data = MessageAsData(logMessage.message);
+	SetThreadNameWithMessage(logMessage);
 	if (data)
 		LogDataToF(self.logger, logMessage.fileName.UTF8String, (int)logMessage.line, logMessage.function.UTF8String, tag, level, data);
 	else
