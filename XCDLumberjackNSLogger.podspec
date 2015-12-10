@@ -12,6 +12,6 @@ Pod::Spec.new do |s|
   s.source_files          = "XCDLumberjackNSLogger.{h,m}"
   s.requires_arc          = true
   
-  s.dependency "CocoaLumberjack", "~> 2.0.0"
-  s.dependency "NSLogger",        "~> 1.5.1"
+  s.dependency "CocoaLumberjack", "~> 2.0"
+  s.dependency "NSLogger",        "~> 1.5"
 end
