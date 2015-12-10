@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "XCDLumberjackNSLogger"
-  s.version               = "1.0.1"
+  s.version               = "1.0.2"
   s.summary               = "A CocoaLumberjack logger which sends logs to NSLogger"
   s.homepage              = "https://github.com/0xced/XCDLumberjackNSLogger"
   s.license               = { :type => "MIT", :file => "LICENSE" }
