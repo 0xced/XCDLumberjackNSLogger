@@ -1,0 +1,2 @@
+github "CocoaLumberjack/CocoaLumberjack" "2.2.0"
+github "fpillet/NSLogger" "v1.6.1"
