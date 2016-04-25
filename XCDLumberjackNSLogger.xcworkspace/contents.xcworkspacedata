@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:XCDLumberjackNSLogger Demo/XCDLumberjackNSLogger Demo.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:XCDLumberjackNSLogger.xcodeproj">
    </FileRef>
    <FileRef
