@@ -14,10 +14,18 @@
 
 ## Installation
 
-XCDLumberjackNSLogger is available through CocoaPods.
+XCDLumberjackNSLogger is available through CocoaPods and Carthage.
+
+CocoaPods:
 
 ```ruby
 pod "XCDLumberjackNSLogger", "~> 1.0"
+```
+
+Carthage:
+
+```objc
+github "0xced/XCDLumberjackNSLogger" ~> 1.0
 ```
 
 ## Usage
