@@ -8,15 +8,16 @@
 
 ## Requirements
 
-- Runs on iOS 5.0 and later
-- Runs on OS X 10.7 and later
+- Runs on iOS 8.0 and later
+- Runs on OS X 10.10 and later
+- Runs on tvOS 9.0 and later
 
 ## Installation
 
 XCDLumberjackNSLogger is available through CocoaPods.
 
 ```ruby
-pod "XCDLumberjackNSLogger", "~> 1.0.2"
+pod "XCDLumberjackNSLogger", "~> 1.0"
 ```
 
 ## Usage
