@@ -6,8 +6,8 @@ Pod::Spec.new do |s|
   s.license                = { :type => "MIT", :file => "LICENSE" }
   s.author                 = { "Cédric Luthi" => "cedric.luthi@gmail.com" }
   s.social_media_url       = "http://twitter.com/0xced"
-  s.ios.deployment_target  = "5.0"
-  s.osx.deployment_target  = "10.7"
+  s.ios.deployment_target  = "8.0"
+  s.osx.deployment_target  = "10.10"
   s.tvos.deployment_target = "9.0"
   s.source                 = { :git => "https://github.com/0xced/XCDLumberjackNSLogger.git", :tag => s.version.to_s }
   s.source_files           = "XCDLumberjackNSLogger.{h,m}"
