@@ -406,6 +406,7 @@
 				C23531FD1CCE46FD00ED8F7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C23532081CCE4A6300ED8F7D /* Build configuration list for PBXNativeTarget "XCDLumberjackNSLogger tvOS" */ = {
 			isa = XCConfigurationList;
@@ -414,6 +415,7 @@
 				C235320A1CCE4A6300ED8F7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C2C2EEC11C2AD98300C5725E /* Build configuration list for PBXProject "XCDLumberjackNSLogger" */ = {
 			isa = XCConfigurationList;
