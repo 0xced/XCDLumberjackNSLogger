@@ -34,8 +34,21 @@ static NSData * MessageAsData(NSString *message);
 
 static void SetThreadNameWithMessage(DDLogMessage *logMessage)
 {
+	static NSDictionary *queueLabels;
+	static dispatch_once_t once;
+	dispatch_once(&once, ^{
+		queueLabels = @{
+			@"com.apple.root.user-interactive-qos": @"User Interactive QoS", // QOS_CLASS_USER_INTERACTIVE
+			@"com.apple.root.user-initiated-qos":   @"User Initiated QoS",   // QOS_CLASS_USER_INITIATED
+			@"com.apple.root.default-qos":          @"Default QoS",          // QOS_CLASS_DEFAULT
+			@"com.apple.root.utility-qos":          @"Utility QoS",          // QOS_CLASS_UTILITY
+			@"com.apple.root.background-qos":       @"Background QoS",       // QOS_CLASS_BACKGROUND
+			@"com.apple.main-thread":               @"Main Queue"
+		};
+	});
+	
 	// There is no _thread name_ parameter for LogXXXToF functions, but we can abuse NSLogger’s thread name caching mechanism which uses the current thread dictionary
-	NSString *queueLabel = [logMessage.queueLabel isEqualToString:@"com.apple.main-thread"] ? @"Main Queue" : logMessage.queueLabel;
+	NSString *queueLabel = queueLabels[logMessage.queueLabel] ?: logMessage.queueLabel;
 	NSThread.currentThread.threadDictionary[@"__$NSLoggerThreadName$__"] = [NSString stringWithFormat:@"%@ [%@]", logMessage.threadID, queueLabel];
 }
 
