@@ -63,9 +63,9 @@ static void SetThreadNameWithMessage(DDLogMessage *logMessage)
 	NSData *data = MessageAsData(logMessage.message);
 	SetThreadNameWithMessage(logMessage);
 	if (data)
-		LogDataToF(self.logger, logMessage.fileName.UTF8String, (int)logMessage.line, logMessage.function.UTF8String, tag, level, data);
+		LogDataToF(self.logger, logMessage.file.UTF8String, (int)logMessage.line, logMessage.function.UTF8String, tag, level, data);
 	else
-		LogMessageRawToF(self.logger, logMessage.fileName.UTF8String, (int)logMessage.line, logMessage.function.UTF8String, tag, level, logMessage.message);
+		LogMessageRawToF(self.logger, logMessage.file.UTF8String, (int)logMessage.line, logMessage.function.UTF8String, tag, level, logMessage.message);
 }
 
 #pragma mark - NSObject
