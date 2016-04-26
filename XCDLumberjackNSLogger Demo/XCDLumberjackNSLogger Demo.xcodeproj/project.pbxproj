@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2077F611CCFC78600E02C9B /* XCDLumberjackNSLogger.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C259B0D81CCE81450059B112 /* XCDLumberjackNSLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C2077F661CCFC81600E02C9B /* CocoaLumberjack.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C2077F621CCFC7FF00E02C9B /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C2077F671CCFC81600E02C9B /* NSLogger.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C2077F631CCFC7FF00E02C9B /* NSLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C245CC6E1CCECB6A00868F12 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C245CC6D1CCECB6A00868F12 /* Settings.bundle */; };
 		C259B0C01CCE80F20059B112 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C259B0BF1CCE80F20059B112 /* main.m */; };
 		C259B0C31CCE80F20059B112 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C259B0C21CCE80F20059B112 /* AppDelegate.m */; };
@@ -17,7 +20,25 @@
 		C259B0D91CCE81450059B112 /* XCDLumberjackNSLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C259B0D81CCE81450059B112 /* XCDLumberjackNSLogger.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C2077F601CCFC77400E02C9B /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C2077F661CCFC81600E02C9B /* CocoaLumberjack.framework in Copy Frameworks */,
+				C2077F671CCFC81600E02C9B /* NSLogger.framework in Copy Frameworks */,
+				C2077F611CCFC78600E02C9B /* XCDLumberjackNSLogger.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		C2077F621CCFC7FF00E02C9B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2077F631CCFC7FF00E02C9B /* NSLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NSLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C245CC6D1CCECB6A00868F12 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		C259B0BB1CCE80F20059B112 /* XCDLumberjackNSLogger Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XCDLumberjackNSLogger Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C259B0BF1CCE80F20059B112 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -84,6 +105,8 @@
 		C259B0D71CCE81380059B112 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C2077F621CCFC7FF00E02C9B /* CocoaLumberjack.framework */,
+				C2077F631CCFC7FF00E02C9B /* NSLogger.framework */,
 				C259B0D81CCE81450059B112 /* XCDLumberjackNSLogger.framework */,
 			);
 			name = Frameworks;
@@ -99,6 +122,7 @@
 				C259B0B71CCE80F20059B112 /* Sources */,
 				C259B0B81CCE80F20059B112 /* Frameworks */,
 				C259B0B91CCE80F20059B112 /* Resources */,
+				C2077F601CCFC77400E02C9B /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
