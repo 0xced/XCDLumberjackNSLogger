@@ -109,11 +109,77 @@
                             <outlet property="delegate" destination="uFG-wQ-z3r" id="VQC-ZT-Q9F"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="XCDLumberjackNSLogger Demo" id="HdB-yr-F0m"/>
+                    <navigationItem key="navigationItem" title="XCDLumberjackNSLogger Demo" id="HdB-yr-F0m">
+                        <barButtonItem key="rightBarButtonItem" title="📡" id="t03-be-5y0">
+                            <connections>
+                                <segue destination="ybx-xZ-SHg" kind="presentation" id="vT7-3c-yEy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEP-PO-uGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="654"/>
+        </scene>
+        <!--NSLogger Clients-->
+        <scene sceneID="12u-bi-bqM">
+            <objects>
+                <tableViewController id="Ain-gr-Ijf" customClass="BonjourClientsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jgh-Am-ofe">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BonjourClientCell" textLabel="KDf-cO-v3W" style="IBUITableViewCellStyleDefault" id="ywa-jD-uwZ">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ywa-jD-uwZ" id="bMh-j8-yZJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KDf-cO-v3W">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ain-gr-Ijf" id="4Bc-Ml-Yzg"/>
+                            <outlet property="delegate" destination="Ain-gr-Ijf" id="nSY-Mr-A73"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="NSLogger Clients" id="j1G-48-RLb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gif-dw-HIf">
+                            <connections>
+                                <action selector="cancel:" destination="Ain-gr-Ijf" id="fIv-Pf-TKB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CaM-vY-zhl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644" y="462"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="k4r-Gf-oab">
+            <objects>
+                <navigationController id="ybx-xZ-SHg" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="M1F-6r-vKE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ain-gr-Ijf" kind="relationship" relationship="rootViewController" id="3fj-SX-R6M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mkm-s6-lSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="462"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yTf-0X-api">

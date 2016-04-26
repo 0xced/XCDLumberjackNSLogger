@@ -109,7 +109,9 @@
                             <outlet property="delegate" destination="iy9-DH-qtZ" id="8ar-rC-Zx1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="XCDLumberjackNSLogger Demo" id="3Mk-qn-zi9"/>
+                    <navigationItem key="navigationItem" title="XCDLumberjackNSLogger Demo" id="3Mk-qn-zi9">
+                        <barButtonItem key="rightBarButtonItem" title="📡" id="dZf-60-zqS"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lHp-CO-E5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

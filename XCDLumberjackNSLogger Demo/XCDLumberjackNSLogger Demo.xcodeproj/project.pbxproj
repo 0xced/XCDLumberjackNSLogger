@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2077F5F1CCFA00900E02C9B /* BonjourClientsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2077F5E1CCFA00900E02C9B /* BonjourClientsTableViewController.m */; };
 		C2077F611CCFC78600E02C9B /* XCDLumberjackNSLogger.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C259B0D81CCE81450059B112 /* XCDLumberjackNSLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C2077F661CCFC81600E02C9B /* CocoaLumberjack.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C2077F621CCFC7FF00E02C9B /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C2077F671CCFC81600E02C9B /* NSLogger.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C2077F631CCFC7FF00E02C9B /* NSLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -37,6 +38,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C2077F5D1CCFA00900E02C9B /* BonjourClientsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonjourClientsTableViewController.h; sourceTree = "<group>"; };
+		C2077F5E1CCFA00900E02C9B /* BonjourClientsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonjourClientsTableViewController.m; sourceTree = "<group>"; };
 		C2077F621CCFC7FF00E02C9B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2077F631CCFC7FF00E02C9B /* NSLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NSLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C245CC6D1CCECB6A00868F12 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -93,6 +96,8 @@
 				C259B0C21CCE80F20059B112 /* AppDelegate.m */,
 				C259B0C41CCE80F20059B112 /* MainViewController.h */,
 				C259B0C51CCE80F20059B112 /* MainViewController.m */,
+				C2077F5D1CCFA00900E02C9B /* BonjourClientsTableViewController.h */,
+				C2077F5E1CCFA00900E02C9B /* BonjourClientsTableViewController.m */,
 				C259B0CA1CCE80F20059B112 /* Assets.xcassets */,
 				C259B0C71CCE80F20059B112 /* Main.storyboard */,
 				C259B0CC1CCE80F20059B112 /* LaunchScreen.storyboard */,
@@ -186,6 +191,7 @@
 			files = (
 				C259B0C61CCE80F20059B112 /* MainViewController.m in Sources */,
 				C259B0C31CCE80F20059B112 /* AppDelegate.m in Sources */,
+				C2077F5F1CCFA00900E02C9B /* BonjourClientsTableViewController.m in Sources */,
 				C259B0C01CCE80F20059B112 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
