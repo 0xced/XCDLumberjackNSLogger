@@ -11,14 +11,13 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString *message = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
 	switch (indexPath.row)
 	{
-		case 0:   DDLogError(@"%@ log sample", message); break;
-		case 1:    DDLogWarn(@"%@ log sample", message); break;
-		case 2:    DDLogInfo(@"%@ log sample", message); break;
-		case 3:   DDLogDebug(@"%@ log sample", message); break;
-		case 4: DDLogVerbose(@"%@ log sample", message); break;
+		case 0: DDLogError(@"Error log sample"); break;
+		case 1: DDLogWarn(@"Warning log sample"); break;
+		case 2: DDLogInfo(@"Info log sample"); break;
+		case 3: DDLogDebug(@"Debug log sample"); break;
+		case 4: DDLogVerbose(@"Verbose log sample"); break;
 		default: break;
 	}
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
