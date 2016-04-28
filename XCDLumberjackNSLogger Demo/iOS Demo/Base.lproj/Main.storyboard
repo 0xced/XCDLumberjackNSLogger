@@ -159,6 +159,11 @@
                                 <action selector="cancel:" destination="Ain-gr-Ijf" id="fIv-Pf-TKB"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Disconnect" id="gkN-In-60m">
+                            <connections>
+                                <action selector="disconnect:" destination="Ain-gr-Ijf" id="jZU-ga-Wk1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CaM-vY-zhl" userLabel="First Responder" sceneMemberID="firstResponder"/>

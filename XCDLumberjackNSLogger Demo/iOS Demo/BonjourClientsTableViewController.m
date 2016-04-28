@@ -33,6 +33,13 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction) disconnect:(id)sender
+{
+	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"NSLoggerBonjourServiceName"];
+	
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - NSNetServiceBrowserDelegate
 
 static NSString * NSNetServicesErrorDescription(NSNetServicesError error)

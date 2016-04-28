@@ -9,6 +9,13 @@
 
 @implementation MainViewController
 
+- (void) viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	self.navigationItem.prompt = [[NSUserDefaults standardUserDefaults] stringForKey:@"NSLoggerBonjourServiceName"];
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	switch (indexPath.row)
