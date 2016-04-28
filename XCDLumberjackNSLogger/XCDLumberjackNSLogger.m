@@ -72,7 +72,7 @@ static void SetThreadNameWithMessage(DDLogMessage *logMessage)
 - (void) logMessage:(DDLogMessage *)logMessage
 {
 	int level = log2f(logMessage.flag);
-	NSString *tag = self.tags[@(logMessage.context)];
+	NSString *tag = self.tags[@(logMessage.context)] ?: logMessage.fileName;
 	NSData *data = MessageAsData(logMessage.message);
 	SetThreadNameWithMessage(logMessage);
 	if (data)
