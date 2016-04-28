@@ -89,12 +89,20 @@ static NSString * NSNetServicesErrorDescription(NSNetServicesError error)
 	return self.services.count;
 }
 
+- (NSIndexPath *) tableView:(UITableView *)tableView willSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+	BOOL isSelectedServiceName = [self.services[indexPath.row].name isEqualToString:[[NSUserDefaults standardUserDefaults] stringForKey:@"NSLoggerBonjourServiceName"]];
+	return isSelectedServiceName ? nil : indexPath;
+}
+
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BonjourClientCell" forIndexPath:indexPath];
 	NSString *serviceName = self.services[indexPath.row].name;
+	BOOL isSelectedServiceName = [serviceName isEqualToString:[[NSUserDefaults standardUserDefaults] stringForKey:@"NSLoggerBonjourServiceName"]];
 	cell.textLabel.text = serviceName;
-	cell.accessoryType = [serviceName isEqualToString:[[NSUserDefaults standardUserDefaults] stringForKey:@"NSLoggerBonjourServiceName"]] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+	cell.accessoryType = isSelectedServiceName ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+	cell.selectionStyle = isSelectedServiceName ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleGray;
 	return cell;
 }
 
