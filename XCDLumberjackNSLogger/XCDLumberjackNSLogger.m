@@ -28,6 +28,10 @@
 			currentLogger.tags = tags;
 			[DDLog addLogger:currentLogger withLevel:level];
 		}
+		else
+		{
+			currentLogger = nil;
+		}
 	};
 	
 	updateLogger([NSNotification notificationWithName:NSUserDefaultsDidChangeNotification object:[NSUserDefaults standardUserDefaults]]);
