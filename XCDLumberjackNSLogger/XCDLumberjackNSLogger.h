@@ -15,6 +15,25 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XCDLumberjackNSLogger : NSObject <DDLogger>
 
 /**
+ *  ------------------------------
+ *  @name Binding to User Defaults
+ *  ------------------------------
+ */
+
+/**
+ *  Automatically synchronize a single instance of a XCDLumberjackNSLogger to a bonjour service name stored in the standard user defaults.
+ *
+ *  @param userDefaultsKey The user defaults key that contains the NSLogger bonjour service name
+ *  @param level           The CocoaLumberjack logging level
+ *  @param tags            The CocoaLumberjack contexts to NSLogger tags mapping, see <tags>
+ *
+ *  @discussion The managed XCDLumberjackNSLogger instance is removed from the CocoaLumberjack loggers when the user defaults value becomes nil or the empty string. The XCDLumberjackNSLogger instance is added back when the user defaults value becomes a valid service name.
+ *
+ *  @warning This method must be called only once.
+ */
++ (void) bindToBonjourServiceNameUserDefaultsKey:(NSString *)userDefaultsKey level:(DDLogLevel)level tags:(NSDictionary * _Nullable)tags;
+
+/**
  *  ------------------
  *  @name Initializing
  *  ------------------

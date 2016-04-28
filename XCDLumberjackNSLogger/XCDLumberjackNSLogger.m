@@ -6,6 +6,35 @@
 
 @implementation XCDLumberjackNSLogger
 
++ (void) bindToBonjourServiceNameUserDefaultsKey:(NSString *)userDefaultsKey level:(DDLogLevel)level tags:(NSDictionary * _Nullable)tags
+{
+	static BOOL bound = NO;
+	if (bound)
+		@throw [NSException exceptionWithName:@"APIMisuseException" reason:[NSString stringWithFormat:@"The method %s must be called only once.", __PRETTY_FUNCTION__] userInfo:nil];
+	bound = YES;
+	
+	static XCDLumberjackNSLogger *currentLogger;
+	
+	void (^updateLogger)(NSNotification *) = ^ void (NSNotification *notification) {
+		NSString *currentServiceName = currentLogger.logger ? (__bridge NSString *)currentLogger.logger->bonjourServiceName : nil;
+		NSString *bonjourServiceName = [notification.object stringForKey:userDefaultsKey];
+		if ([currentServiceName isEqualToString:bonjourServiceName])
+			return;
+		
+		[DDLog removeLogger:currentLogger];
+		if (bonjourServiceName.length > 0)
+		{
+			currentLogger = [[self alloc] initWithBonjourServiceName:bonjourServiceName];
+			currentLogger.tags = tags;
+			[DDLog addLogger:currentLogger withLevel:level];
+		}
+	};
+	
+	updateLogger([NSNotification notificationWithName:NSUserDefaultsDidChangeNotification object:[NSUserDefaults standardUserDefaults]]);
+	
+	[[NSNotificationCenter defaultCenter] addObserverForName:NSUserDefaultsDidChangeNotification object:nil queue:nil usingBlock:updateLogger];
+}
+
 - (instancetype) init
 {
 	return [self initWithBonjourServiceName:nil];
