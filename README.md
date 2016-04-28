@@ -19,18 +19,24 @@ XCDLumberjackNSLogger is available through CocoaPods and Carthage.
 CocoaPods:
 
 ```ruby
-pod "XCDLumberjackNSLogger", "~> 1.0"
+pod "XCDLumberjackNSLogger", "~> 1.1"
 ```
 
 Carthage:
 
 ```objc
-github "0xced/XCDLumberjackNSLogger" ~> 1.0
+github "0xced/XCDLumberjackNSLogger" ~> 1.1
 ```
 
 ## Usage
 
 XCDLumberjackNSLogger is [fully documented](http://cocoadocs.org/docsets/XCDLumberjackNSLogger/).
+
+#### Binding to User Defaults
+
+```objc
+[XCDLumberjackNSLogger bindToBonjourServiceNameUserDefaultsKey:@"NSLoggerBonjourServiceName" level:DDLogLevelAll tags:nil];
+```
 
 #### Simply send logs to NSLogger
 
