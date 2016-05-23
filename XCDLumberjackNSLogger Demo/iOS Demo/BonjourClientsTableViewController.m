@@ -54,6 +54,7 @@ static NSArray<NSString *> * NetServiceAddresses(NSNetService *service)
 	[super viewDidLoad];
 	
 	self.netServiceBrowser = [NSNetServiceBrowser new];
+	self.netServiceBrowser.includesPeerToPeer = YES;
 	self.netServiceBrowser.delegate = self;
 	[self.netServiceBrowser searchForServicesOfType:@"_nslogger-ssl._tcp." inDomain:@""];
 }
