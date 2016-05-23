@@ -5,7 +5,37 @@
 
 #import "BonjourClientsTableViewController.h"
 
-@interface BonjourClientsTableViewController () <NSNetServiceBrowserDelegate>
+#import <netinet/in.h>
+#import <arpa/inet.h>
+
+static NSArray<NSString *> * NetServiceAddresses(NSNetService *service)
+{
+	NSMutableArray<NSString *> *addresses = [NSMutableArray new];
+	for (NSData *addressData in service.addresses)
+	{
+		NSString *addressDescription;
+		if (addressData.length == sizeof(struct sockaddr_in6))
+		{
+			char ip[INET6_ADDRSTRLEN] = {0};
+			inet_ntop(AF_INET6, addressData.bytes + offsetof(struct sockaddr_in6, sin6_addr), ip, sizeof(ip));
+			addressDescription = [NSString stringWithFormat:@"[%@]:%@", @(ip), @(service.port)];
+		}
+		else if (addressData.length == sizeof(struct sockaddr_in))
+		{
+			char ip[INET_ADDRSTRLEN] = {0};
+			inet_ntop(AF_INET, addressData.bytes + offsetof(struct sockaddr_in, sin_addr), ip, sizeof(ip));
+			addressDescription = [NSString stringWithFormat:@"%@:%@", @(ip), @(service.port)];
+		}
+		else
+		{
+			addressDescription = addressData.description;
+		}
+		[addresses addObject:addressDescription];
+	}
+	return addresses;
+}
+
+@interface BonjourClientsTableViewController () <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 @property (nonatomic, strong) NSNetServiceBrowser *netServiceBrowser;
 @property (nonatomic, strong) NSMutableArray<NSNetService *> *services;
 @end
@@ -70,6 +100,9 @@ static NSString * NSNetServicesErrorDescription(NSNetServicesError error)
 
 - (void) netServiceBrowser:(NSNetServiceBrowser *)browser didFindService:(NSNetService *)service moreComing:(BOOL)moreComing
 {
+	[service setDelegate:self];
+	[service resolveWithTimeout:10];
+	
 	[self.services addObject:service];
 	[self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:self.services.count - 1 inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -83,6 +116,8 @@ static NSString * NSNetServicesErrorDescription(NSNetServicesError error)
 		[self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:serviceIndex inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 }
+
+#pragma mark - UITableView
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -98,9 +133,10 @@ static NSString * NSNetServicesErrorDescription(NSNetServicesError error)
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BonjourClientCell" forIndexPath:indexPath];
-	NSString *serviceName = self.services[indexPath.row].name;
-	BOOL isSelectedServiceName = [serviceName isEqualToString:[[NSUserDefaults standardUserDefaults] stringForKey:@"NSLoggerBonjourServiceName"]];
-	cell.textLabel.text = serviceName;
+	NSNetService *service = self.services[indexPath.row];
+	BOOL isSelectedServiceName = [service.name isEqualToString:[[NSUserDefaults standardUserDefaults] stringForKey:@"NSLoggerBonjourServiceName"]];
+	cell.textLabel.text = service.name;
+	cell.detailTextLabel.text = [NetServiceAddresses(service) componentsJoinedByString:@" ◇ "];
 	cell.accessoryType = isSelectedServiceName ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 	cell.selectionStyle = isSelectedServiceName ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleGray;
 	return cell;
@@ -111,6 +147,28 @@ static NSString * NSNetServicesErrorDescription(NSNetServicesError error)
 	[[NSUserDefaults standardUserDefaults] setObject:self.services[indexPath.row].name forKey:@"NSLoggerBonjourServiceName"];
 	
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - NSNetServiceDelegate
+
+- (void) reloadService:(NSNetService *)service
+{
+	NSUInteger serviceIndex = [self.services indexOfObject:service];
+	if (serviceIndex != NSNotFound)
+	{
+		[self.tableView reloadRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:serviceIndex inSection:0] ] withRowAnimation:UITableViewRowAnimationAutomatic];
+	}
+}
+
+- (void) netServiceDidResolveAddress:(NSNetService *)service
+{
+	[self reloadService:service];
+}
+
+- (void) netService:(NSNetService *)service didNotResolve:(NSDictionary<NSString *, NSNumber *> *)errorDict;
+{
+	NSLog(@"netService:%@ didNotResolve:%@", service, errorDict);
+	[self reloadService:service];
 }
 
 @end
