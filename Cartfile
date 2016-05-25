@@ -1,2 +1,2 @@
 github "CocoaLumberjack/CocoaLumberjack" ~> 2.2
-github "fpillet/NSLogger" "130a1143a5dfff5f65f43b17064705f35d74db06" # v1.6.1 + framework support for OS X and tvOS
+github "fpillet/NSLogger" ~> 1.7

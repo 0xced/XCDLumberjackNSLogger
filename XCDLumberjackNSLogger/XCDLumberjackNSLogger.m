@@ -16,7 +16,7 @@
 	static XCDLumberjackNSLogger *currentLogger;
 	
 	void (^updateLogger)(NSNotification *) = ^ void (NSNotification *notification) {
-		NSString *currentServiceName = currentLogger.logger ? (__bridge NSString *)currentLogger.logger->bonjourServiceName : nil;
+		NSString *currentServiceName = currentLogger.logger ? (__bridge NSString *)LoggerGetBonjourServiceName(currentLogger.logger) : nil;
 		NSString *bonjourServiceName = [notification.object stringForKey:userDefaultsKey];
 		if ([currentServiceName isEqualToString:bonjourServiceName])
 			return;
@@ -51,7 +51,7 @@
 	
 	_logger = LoggerInit();
 	LoggerSetupBonjour(_logger, NULL, (__bridge CFStringRef)bonjourServiceName);
-	LoggerSetOptions(_logger, _logger->options & ~kLoggerOption_CaptureSystemConsole);
+	LoggerSetOptions(_logger, LoggerGetOptions(_logger) & ~kLoggerOption_CaptureSystemConsole);
 	
 	return self;
 }
@@ -119,21 +119,22 @@ static void SetThreadNameWithMessage(DDLogMessage *logMessage)
 - (NSString *) debugDescription
 {
 	NSMutableString *debugDescription = [NSMutableString stringWithString:[super debugDescription]];
-	NSString *bonjourServiceName = (__bridge NSString *)self.logger->bonjourServiceName;
-	NSString *viewerHost = (__bridge NSString *)self.logger->host;
-	uint32_t options = self.logger->options;
+	NSString *bonjourServiceName = (__bridge NSString *)LoggerGetBonjourServiceName(self.logger);
+	NSString *viewerHost = (__bridge NSString *)LoggerGetViewerHostName(self.logger);
+	uint32_t options = LoggerGetOptions(self.logger);
 	NSDictionary *tags = self.tags;
 	
 	if (bonjourServiceName)
 		[debugDescription appendFormat:@"\n\tBonjour Service Name: %@", bonjourServiceName];
 	if (viewerHost)
-		[debugDescription appendFormat:@"\n\tViewer Host: %@:%@", viewerHost, @(self.logger->port)];
+		[debugDescription appendFormat:@"\n\tViewer Host: %@:%@", viewerHost, @(LoggerGetViewerPort(self.logger))];
 	
 	[debugDescription appendString:@"\n\tOptions:"];
 	[debugDescription appendFormat:@"\n\t\tLog To Console:               %@", options & kLoggerOption_LogToConsole              ? @"YES" : @"NO"];
 	[debugDescription appendFormat:@"\n\t\tCapture System Console:       %@", options & kLoggerOption_CaptureSystemConsole      ? @"YES" : @"NO"];
 	[debugDescription appendFormat:@"\n\t\tBuffer Logs Until Connection: %@", options & kLoggerOption_BufferLogsUntilConnection ? @"YES" : @"NO"];
 	[debugDescription appendFormat:@"\n\t\tBrowse Bonjour:               %@", options & kLoggerOption_BrowseBonjour             ? @"YES" : @"NO"];
+	[debugDescription appendFormat:@"\n\t\tBrowse Peer-to-Peer:          %@", options & kLoggerOption_BrowsePeerToPeer          ? @"YES" : @"NO"];
 	[debugDescription appendFormat:@"\n\t\tBrowse Only Local Domain:     %@", options & kLoggerOption_BrowseOnlyLocalDomain     ? @"YES" : @"NO"];
 	[debugDescription appendFormat:@"\n\t\tUse SSL:                      %@", options & kLoggerOption_UseSSL                    ? @"YES" : @"NO"];
 	
