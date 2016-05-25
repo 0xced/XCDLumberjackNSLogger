@@ -34,9 +34,46 @@ XCDLumberjackNSLogger is [fully documented](http://cocoadocs.org/docsets/XCDLumb
 
 #### Binding to User Defaults
 
+The easiest way to use XCDLumberjackNSLogger is to bind a logger to a user defaults key.
+
 ```objc
 [XCDLumberjackNSLogger bindToBonjourServiceNameUserDefaultsKey:@"NSLoggerBonjourServiceName" configurationHandler:nil];
 ```
+
+Anytime you change the user defaults key (`NSLoggerBonjourServiceName` in this example), the logger reconnects to the desktop viewer with the given service name.
+
+You can change the service name user defaults manually with
+
+```objc
+[[NSUserDefaults standardUserDefaults] setObject:serviceName forKey:@"NSLoggerBonjourServiceName"];
+```
+
+or with a [Settings bundle][1]:
+
+```xml
+<dict>
+	<key>AutocapitalizationType</key>
+	<string>None</string>
+	<key>AutocorrectionType</key>
+	<string>No</string>
+	<key>DefaultValue</key>
+	<string></string>
+	<key>IsSecure</key>
+	<false/>
+	<key>Key</key>
+	<string>NSLoggerBonjourServiceName</string>
+	<key>KeyboardType</key>
+	<string>Alphabet</string>
+	<key>Title</key>
+	<string>NSLogger Service Name</string>
+	<key>Type</key>
+	<string>PSTextFieldSpecifier</string>
+</dict>
+```
+
+This is very handy to get logs even in the App Store. Just open the settings of your app (in the iOS Settings app) and change the service name to automatically activate the logger.
+
+When debugging with Xcode you can set `-NSLoggerBonjourServiceName "Your Service Name"` in *Arguments Passed On Launch* [in your scheme][2] to set the `NSLoggerBonjourServiceName` user default.
 
 #### Simply send logs to NSLogger
 
@@ -77,3 +114,6 @@ Cédric Luthi
 ## License
 
 XCDLumberjackNSLogger is available under the MIT license. See the [LICENSE](LICENSE) file for more information.
+
+[1]: https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/UserDefaults/Preferences/Preferences.html
+[2]: https://developer.apple.com/library/ios/recipes/xcode_help-scheme_editor/Articles/SchemeRun.html
