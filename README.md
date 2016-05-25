@@ -35,7 +35,7 @@ XCDLumberjackNSLogger is [fully documented](http://cocoadocs.org/docsets/XCDLumb
 #### Binding to User Defaults
 
 ```objc
-[XCDLumberjackNSLogger bindToBonjourServiceNameUserDefaultsKey:@"NSLoggerBonjourServiceName" level:DDLogLevelAll tags:nil];
+[XCDLumberjackNSLogger bindToBonjourServiceNameUserDefaultsKey:@"NSLoggerBonjourServiceName" configurationHandler:nil];
 ```
 
 #### Simply send logs to NSLogger

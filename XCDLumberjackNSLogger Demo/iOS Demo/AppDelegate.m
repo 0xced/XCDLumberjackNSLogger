@@ -13,7 +13,7 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[XCDLumberjackNSLogger bindToBonjourServiceNameUserDefaultsKey:@"NSLoggerBonjourServiceName" level:DDLogLevelAll tags:nil];
+	[XCDLumberjackNSLogger bindToBonjourServiceNameUserDefaultsKey:@"NSLoggerBonjourServiceName" configurationHandler:nil];
 	
 	DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
 	ttyLogger.colorsEnabled = YES;

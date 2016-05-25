@@ -6,7 +6,7 @@
 
 @implementation XCDLumberjackNSLogger
 
-+ (void) bindToBonjourServiceNameUserDefaultsKey:(NSString *)userDefaultsKey level:(DDLogLevel)level tags:(NSDictionary * _Nullable)tags
++ (void) bindToBonjourServiceNameUserDefaultsKey:(NSString *)userDefaultsKey configurationHandler:(DDLogLevel (^)(XCDLumberjackNSLogger *))configurationHandler
 {
 	static BOOL bound = NO;
 	if (bound)
@@ -25,7 +25,7 @@
 		if (bonjourServiceName.length > 0)
 		{
 			currentLogger = [[self alloc] initWithBonjourServiceName:bonjourServiceName];
-			currentLogger.tags = tags;
+			DDLogLevel level = configurationHandler ? configurationHandler(currentLogger) : DDLogLevelAll;
 			[DDLog addLogger:currentLogger withLevel:level];
 		}
 		else
