@@ -71,7 +71,7 @@ or with a [Settings bundle][1]:
 </dict>
 ```
 
-This is very handy to get logs even in the App Store. Just open the settings of your app (in the iOS Settings app) and change the service name to automatically activate the logger.
+This is very handy to get logs even in the App Store with zero overhead. Just open the settings of your app (in the iOS Settings app) and change the service name to automatically activate the logger.
 
 When debugging with Xcode you can set `-NSLoggerBonjourServiceName "Your Service Name"` in *Arguments Passed On Launch* [in your scheme][2] to set the `NSLoggerBonjourServiceName` user default.
 
