@@ -5,12 +5,32 @@
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import <NSLogger/LoggerClient.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  The `XCDLumberjackNSLogger` class implements a [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack) logger which sends logs to [NSLogger](https://github.com/fpillet/NSLogger).
  *
  *  `XCDLumberjackNSLogger` does not support log formatters, i.e. setting the `logFormatter` property has no effect.
  */
 @interface XCDLumberjackNSLogger : NSObject <DDLogger>
+
+/**
+ *  ------------------------------
+ *  @name Binding to User Defaults
+ *  ------------------------------
+ */
+
+/**
+ *  Automatically synchronize a single instance of a XCDLumberjackNSLogger to a bonjour service name stored in the standard user defaults.
+ *
+ *  @param userDefaultsKey      The user defaults key that contains the NSLogger bonjour service name
+ *  @param configurationHandler A block which is called just before the managed logger is added to the CocoaLumberjack loggers. Configure the logger in this handler, you can set its <tags> for example. The return value is the level at which the managed logger will be added. Pass `nil` if you do not need any special configuration.
+ *
+ *  @discussion The managed XCDLumberjackNSLogger instance is removed from the CocoaLumberjack loggers when the user defaults value becomes nil or the empty string. A new XCDLumberjackNSLogger instance is added back when the user defaults value becomes a valid service name.
+ *
+ *  @warning This method must be called only once.
+ */
++ (void) bindToBonjourServiceNameUserDefaultsKey:(NSString *)userDefaultsKey configurationHandler:(nullable DDLogLevel (^)(XCDLumberjackNSLogger *logger))configurationHandler;
 
 /**
  *  ------------------
@@ -27,7 +47,7 @@
  *
  *  @return A logger with the specified bonjour service name.
  */
-- (instancetype) initWithBonjourServiceName:(NSString *)bonjourServiceName NS_DESIGNATED_INITIALIZER;
+- (instancetype) initWithBonjourServiceName:(NSString * _Nullable)bonjourServiceName NS_DESIGNATED_INITIALIZER;
 
 /**
  *  -------------------------------------
@@ -56,6 +76,8 @@
  *
  *  For example, CocoaHTTPServer [defines a context](https://github.com/robbiehanson/CocoaHTTPServer/blob/52b2a64e9cbdb5f09cc915814a5fb68a45dd3707/Core/HTTPLogging.h#L55) of 80. In order to translate it to a `CocoaHTTPServer` tag, use  `lubmerjackNSLogger.tags = @{ @80 : @"CocoaHTTPServer" };`
  */
-@property (copy) NSDictionary *tags;
+@property (copy, nullable) NSDictionary *tags;
 
 @end
+
+NS_ASSUME_NONNULL_END
