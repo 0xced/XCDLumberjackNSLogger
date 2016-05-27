@@ -34,9 +34,14 @@
 		}
 	};
 	
-	updateLogger([NSNotification notificationWithName:NSUserDefaultsDidChangeNotification object:[NSUserDefaults standardUserDefaults]]);
+	NSOperationQueue *queue = [NSOperationQueue new];
+	queue.name = @"XCDLumberjackNSLogger.UserDefaults";
+	[[NSNotificationCenter defaultCenter] addObserverForName:NSUserDefaultsDidChangeNotification object:nil queue:queue usingBlock:updateLogger];
 	
-	[[NSNotificationCenter defaultCenter] addObserverForName:NSUserDefaultsDidChangeNotification object:nil queue:nil usingBlock:updateLogger];
+	[queue addOperationWithBlock:^{
+		updateLogger([NSNotification notificationWithName:NSUserDefaultsDidChangeNotification object:[NSUserDefaults standardUserDefaults]]);
+	}];
+	[queue waitUntilAllOperationsAreFinished];
 }
 
 - (instancetype) init
