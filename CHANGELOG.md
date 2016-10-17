@@ -1,3 +1,7 @@
+#### Version 1.1.1
+
+* Support for CocoaLumberjack 3.0.0 by loosening dependencies’ version requirements (#8)
+
 #### Version 1.1.0
 
 * XCDLumberjackNSLogger builds as a framework and is therefore compatible with Carthage (#1)

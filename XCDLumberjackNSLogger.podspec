@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                   = "XCDLumberjackNSLogger"
-  s.version                = "1.1.0"
+  s.version                = "1.1.1"
   s.summary                = "A CocoaLumberjack logger which sends logs to NSLogger"
   s.homepage               = "https://github.com/0xced/XCDLumberjackNSLogger"
   s.license                = { :type => "MIT", :file => "LICENSE" }
@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
   s.source_files           = "XCDLumberjackNSLogger/XCDLumberjackNSLogger.{h,m}"
   s.requires_arc           = true
   
-  s.dependency "CocoaLumberjack", "~> 2.0"
-  s.dependency "NSLogger",        "~> 1.7"
+  s.dependency "CocoaLumberjack", ">= 2.0"
+  s.dependency "NSLogger",        ">= 1.7"
 end
